@@ -21,16 +21,19 @@ RUN cp -r * /go/mx-chain-go/cmd/node/config/
 WORKDIR /go/mx-chain-go/cmd/node
 
 # ===== SECOND STAGE ======
-FROM ubuntu:22.04 as ubuntu
-RUN apt-get update -y && apt-get upgrade -y
+#FROM ubuntu:22.04 as ubuntu
+#RUN apt-get update -y && apt-get upgrade -y
 
 FROM scratch
 
-COPY --from=ubuntu "/lib" "/lib"
-COPY --from=ubuntu "/lib64" "/lib64"
+#COPY --from=ubuntu "/lib" "/lib"
+#COPY --from=ubuntu "/lib64" "/lib64"
+COPY lib/ /lib
+COPY lib64/ /lib64 
 COPY --from=builder "/go/mx-chain-go/cmd/node" "/go/mx-chain-go/cmd/node/"
 COPY --from=builder "/lib/libwasmer_linux_amd64.so" "/lib/libwasmer_linux_amd64.so"
 COPY --from=builder "/lib/libvmexeccapi.so" "/lib/libvmexeccapi.so"
+#COPY --from=ubuntu "/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2" "/lib64/"
 
 WORKDIR /go/mx-chain-go/cmd/node/
 

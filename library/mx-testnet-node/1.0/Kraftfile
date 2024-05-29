@@ -9,7 +9,7 @@ template:
 
 rootfs: ./Dockerfile
 
-cmd: "/go/mx-chain-go/cmd/node/node --rest-api-interface=:8080 --log-level *:TRACE"
+cmd: "/go/mx-chain-go/cmd/node/node"
 unikraft:
   source: https://github.com/unikraft/unikraft.git
   version: staging
@@ -43,7 +43,7 @@ unikraft:
     CONFIG_LIBDEVFS: 'y'
     CONFIG_LIBPOSIX_ENVIRON_ENVP0: "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
     CONFIG_LIBPOSIX_ENVIRON_ENVP1: "LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib"
-    CONFIG_LIBPOSIX_ENVIRON_ENVP2: "HOME=/go/mx-chain-go/cmd/node/"
+    CONFIG_LIBPOSIX_ENVIRON_ENVP2: "PWD=/go/mx-chain-go/cmd/node/"
     CONFIG_LIBPOSIX_ENVIRON: 'y'
     CONFIG_LIBPOSIX_ENVIRON_LIBPARAM: 'y'
     CONFIG_LIBPOSIX_ENVIRON_LIBPARAM_MAXCOUNT: '64'
